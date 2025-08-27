@@ -1,7 +1,10 @@
+const ProyectoModel = require('../Models/proyectoModel');
+const ProyectoView = require('../Views/proyectoView');
+
 class ProyectoController {
-    constructor(modelo, vista) {
-        this.modelo = modelo;
-        this.vista = vista;
+    constructor() {
+        this.modelo = new ProyectoModel();
+        this.vista = new ProyectoView();
     }
     
     async crearProyecto() {

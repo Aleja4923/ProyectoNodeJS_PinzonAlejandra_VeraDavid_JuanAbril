@@ -1,7 +1,10 @@
+const ClienteModel = require('../Models/clienteModel');
+const ClienteView = require('../Views/clienteView');
+
 class ClienteController {
-    constructor(modelo, vista) {
-        this.modelo = modelo;
-        this.vista = vista;
+    constructor() {
+        this.modelo = new ClienteModel();
+        this.vista = new ClienteView();
     }
     
     async crearCliente() {

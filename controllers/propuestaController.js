@@ -1,7 +1,10 @@
+const PropuestaModel = require('../Models/propuestaModel');
+const PropuestaView = require('../Views/propuestaView');
+
 class PropuestaController {
-    constructor(modelo, vista) {
-        this.modelo = modelo;
-        this.vista = vista;
+    constructor() {
+        this.modelo = new PropuestaModel();
+        this.vista = new PropuestaView();
     }
     
     async crearPropuesta() {

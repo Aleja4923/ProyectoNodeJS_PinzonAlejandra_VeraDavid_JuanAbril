@@ -1,39 +1,22 @@
-// Importar vistas
+// Importar vista principal
 const MainView = require('./Views/mainView');
-const ClienteView = require('./Views/clienteView');
-const PropuestaView = require('/Views/propuestaView');
-const ProyectoView = require('/Views/proyectoView');
 
-// Importar modelos
-const ClienteModel = require('/Models/clienteModel');
-const PropuestaModel = require('/Models/propuestaModel');
-const ProyectoModel = require('/Models/proyectoModel');
-const ContratoModel = require('/Models/contratoModel');
-const EntregableModel = require('/Models/entregableModel');
-const TransaccionModel = require('/Models/transaccionModel');
-const FacturaModel = require('./Models/facturaModel');
-const HistorialEstadoModel = require('./Models/historialEstadoModel');
-
-
-const ClienteController = require('/Controllers/clienteController');
+// Importar controladores
+const ClienteController = require('./Controllers/clienteController');
 const PropuestaController = require('/Controllers/propuestaController');
 const ProyectoController = require('/Controllers/proyectoController');
+const ContratoController = require('./Controllers/contratoController');
+const EntregableController = require('./Controllers/entregableController');
 
-
+// Instanciar componentes
 const mainView = new MainView();
-const clienteModel = new ClienteModel();
-const clienteView = new ClienteView();
-const clienteController = new ClienteController(clienteModel, clienteView);
 
-
-const propuestaModel = new PropuestaModel();
-const propuestaView = new PropuestaView();
-const propuestaController = new PropuestaController(propuestaModel, propuestaView);
-
-
-const proyectoModel = new ProyectoModel();
-const proyectoView = new ProyectoView();
-const proyectoController = new ProyectoController(proyectoModel, proyectoView);
+// Instanciar controladores (cada uno maneja su propio modelo y vista)
+const clienteController = new ClienteController();
+const propuestaController = new PropuestaController();
+const proyectoController = new ProyectoController();
+const contratoController = new ContratoController();
+const entregableController = new EntregableController();
 
 async function gestionarClientes() {
     let continuar = true;
@@ -157,14 +140,75 @@ async function main() {
                 case 3:
                     await gestionarProyectos();
                     break;
-                case 4:
-                    mainView.mostrarMensaje('Gestión de Contratos - Por implementar');
-                    mainView.pausar();
-                    break;
-                case 5:
-                    mainView.mostrarMensaje('Gestión de Entregables - Por implementar');
-                    mainView.pausar();
-                    break;
+async function gestionarContratos() {
+    let continuar = true;
+    while(continuar) {
+        const opcion = mainView.mostrarMenuCRUD('contratos');
+        
+        switch(opcion) {
+            case 1:
+                await contratoController.crearContrato();
+                break;
+            case 2:
+                await contratoController.mostrarContratos();
+                break;
+            case 3:
+                await contratoController.buscarContrato();
+                break;
+            case 4:
+                await contratoController.actualizarContrato();
+                break;
+            case 5:
+                await contratoController.eliminarContrato();
+                break;
+            case 6:
+                continuar = false;
+                break;
+            default:
+                mainView.mostrarMensaje('Opción no válida');
+                break;
+        }
+        
+        if(continuar) {
+            mainView.pausar();
+        }
+    }
+}
+
+async function gestionarEntregables() {
+    let continuar = true;
+    while(continuar) {
+        const opcion = mainView.mostrarMenuCRUD('entregables');
+        
+        switch(opcion) {
+            case 1:
+                await entregableController.crearEntregable();
+                break;
+            case 2:
+                await entregableController.mostrarEntregables();
+                break;
+            case 3:
+                await entregableController.buscarEntregable();
+                break;
+            case 4:
+                await entregableController.actualizarEntregable();
+                break;
+            case 5:
+                await entregableController.eliminarEntregable();
+                break;
+            case 6:
+                continuar = false;
+                break;
+            default:
+                mainView.mostrarMensaje('Opción no válida');
+                break;
+        }
+        
+        if(continuar) {
+            mainView.pausar();
+        }
+    }
+}
                 case 6:
                     mainView.mostrarMensaje('Gestión de Transacciones - Por implementar');
                     mainView.pausar();
