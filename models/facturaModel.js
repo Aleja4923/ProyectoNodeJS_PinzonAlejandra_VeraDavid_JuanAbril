@@ -1,38 +1,40 @@
 const {ObjectId} = require('mongodb');
 const connectDB = require('../db');
 
-class ClienteModel {
+class FacturaModel {
     constructor() {
         this.schema = {
-            nombre: 'string',
-            empresa: 'string',
-            email: 'string',
-            telefono: 'string',
-            direccion: 'string',
-            fechaRegistro: 'object',
-            activo: 'boolean'
+            proyectoId: 'string',
+            fechaEmitida: 'object',
+            fechaVencimiento: 'object',
+            fechaPago: 'object',
+            subtotal: 'number',
+            total: 'number',
+            estado: 'string'
         }
     }
     
-    validar(cliente) {
-        for(let campo in this.schema) {
-            if(typeof cliente[campo] !== this.schema[campo]) {
+    validar(factura) {
+        const requiredFields = ['proyectoId', 'fechaEmitida', 'fechaVencimiento', 'subtotal', 'total', 'estado'];
+        for(let campo of requiredFields) {
+            if(typeof factura[campo] !== this.schema[campo]) {
                 return false;
             }
         }
         return true;
     }
     
-    async crear(cliente) {
-        cliente.fechaRegistro = new Date();
-        cliente.activo = true;
+    async crear(factura) {
+        factura.fechaEmitida = new Date();
+        factura.estado = 'emitida';
+        factura.fechaPago = null;
         
-        if(!this.validar(cliente)) {
+        if(!this.validar(factura)) {
             throw new Error('Error en el tipo de datos ingresados');
         }
         
         const db = await connectDB.connect();
-        const result = await db.collection('clientes').insertOne(cliente);
+        const result = await db.collection('facturas').insertOne(factura);
         let idObjeto = result.insertedId;
         await connectDB.disconnect();
         return idObjeto;
@@ -40,21 +42,21 @@ class ClienteModel {
     
     async listar() {
         const db = await connectDB.connect();
-        let arreglo = await db.collection('clientes').find().toArray();
+        let arreglo = await db.collection('facturas').find().toArray();
         await connectDB.disconnect();
         return arreglo;
     }
     
     async buscarPorId(id) {
         const db = await connectDB.connect();
-        const cliente = await db.collection('clientes').findOne({_id: new ObjectId(id)});
+        const factura = await db.collection('facturas').findOne({_id: new ObjectId(id)});
         await connectDB.disconnect();
-        return cliente;
+        return factura;
     }
     
     async actualizar(id, datosActualizados) {
         const db = await connectDB.connect();
-        const result = await db.collection('clientes').updateOne(
+        const result = await db.collection('facturas').updateOne(
             {_id: new ObjectId(id)}, 
             {$set: datosActualizados}
         );
@@ -64,8 +66,10 @@ class ClienteModel {
     
     async eliminar(id) {
         const db = await connectDB.connect();
-        const result = await db.collection('clientes').deleteOne({_id: new ObjectId(id)});
+        const result = await db.collection('facturas').deleteOne({_id: new ObjectId(id)});
         await connectDB.disconnect();
         return result.deletedCount;
     }
 }
+
+module.exports = FacturaModel;

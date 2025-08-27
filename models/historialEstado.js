@@ -1,38 +1,36 @@
 const {ObjectId} = require('mongodb');
 const connectDB = require('../db');
 
-class ClienteModel {
+class HistorialEstadoModel {
     constructor() {
         this.schema = {
-            nombre: 'string',
-            empresa: 'string',
-            email: 'string',
-            telefono: 'string',
-            direccion: 'string',
-            fechaRegistro: 'object',
-            activo: 'boolean'
+            proyectoId: 'string',
+            estadoAnterior: 'string',
+            estadoNuevo: 'string',
+            fechaCambio: 'object',
+            motivo: 'string',
+            usuario: 'string'
         }
     }
     
-    validar(cliente) {
+    validar(historial) {
         for(let campo in this.schema) {
-            if(typeof cliente[campo] !== this.schema[campo]) {
+            if(typeof historial[campo] !== this.schema[campo]) {
                 return false;
             }
         }
         return true;
     }
     
-    async crear(cliente) {
-        cliente.fechaRegistro = new Date();
-        cliente.activo = true;
+    async crear(historial) {
+        historial.fechaCambio = new Date();
         
-        if(!this.validar(cliente)) {
+        if(!this.validar(historial)) {
             throw new Error('Error en el tipo de datos ingresados');
         }
         
         const db = await connectDB.connect();
-        const result = await db.collection('clientes').insertOne(cliente);
+        const result = await db.collection('historialEstados').insertOne(historial);
         let idObjeto = result.insertedId;
         await connectDB.disconnect();
         return idObjeto;
@@ -40,21 +38,21 @@ class ClienteModel {
     
     async listar() {
         const db = await connectDB.connect();
-        let arreglo = await db.collection('clientes').find().toArray();
+        let arreglo = await db.collection('historialEstados').find().toArray();
         await connectDB.disconnect();
         return arreglo;
     }
     
     async buscarPorId(id) {
         const db = await connectDB.connect();
-        const cliente = await db.collection('clientes').findOne({_id: new ObjectId(id)});
+        const historial = await db.collection('historialEstados').findOne({_id: new ObjectId(id)});
         await connectDB.disconnect();
-        return cliente;
+        return historial;
     }
     
     async actualizar(id, datosActualizados) {
         const db = await connectDB.connect();
-        const result = await db.collection('clientes').updateOne(
+        const result = await db.collection('historialEstados').updateOne(
             {_id: new ObjectId(id)}, 
             {$set: datosActualizados}
         );
@@ -64,8 +62,10 @@ class ClienteModel {
     
     async eliminar(id) {
         const db = await connectDB.connect();
-        const result = await db.collection('clientes').deleteOne({_id: new ObjectId(id)});
+        const result = await db.collection('historialEstados').deleteOne({_id: new ObjectId(id)});
         await connectDB.disconnect();
         return result.deletedCount;
     }
 }
+
+module.exports = HistorialEstadoModel;

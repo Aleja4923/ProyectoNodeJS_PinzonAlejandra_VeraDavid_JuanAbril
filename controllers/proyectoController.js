@@ -1,61 +1,61 @@
-class ClienteController {
+class ProyectoController {
     constructor(modelo, vista) {
         this.modelo = modelo;
         this.vista = vista;
     }
     
-    async crearCliente() {
-        const datos = this.vista.pedirDatosCliente();
+    async crearProyecto() {
+        const datos = this.vista.pedirDatosProyecto();
         try {
             const id = await this.modelo.crear(datos);
-            this.vista.mostrarMensaje(`Cliente creado con el ID: ${id}`);
+            this.vista.mostrarMensaje(`Proyecto creado con el ID: ${id}`);
         } catch(error) {
             this.vista.mostrarMensaje(`Error: ${error.message}`);
         }
     }
     
-    async mostrarClientes() {
+    async mostrarProyectos() {
         try {
-            const clientes = await this.modelo.listar();
-            this.vista.mostrarClientes(clientes);
+            const proyectos = await this.modelo.listar();
+            this.vista.mostrarProyectos(proyectos);
         } catch(error) {
             this.vista.mostrarMensaje(`Error: ${error.message}`);
         }
     }
     
-    async buscarCliente() {
-        const id = this.vista.pedirIdCliente();
+    async buscarProyecto() {
+        const id = this.vista.pedirIdProyecto();
         try {
-            const cliente = await this.modelo.buscarPorId(id);
-            this.vista.mostrarCliente(cliente);
+            const proyecto = await this.modelo.buscarPorId(id);
+            this.vista.mostrarProyecto(proyecto);
         } catch(error) {
             this.vista.mostrarMensaje(`Error: ${error.message}`);
         }
     }
     
-    async actualizarCliente() {
-        const id = this.vista.pedirIdCliente();
+    async actualizarProyecto() {
+        const id = this.vista.pedirIdProyecto();
         const datosActualizados = this.vista.pedirDatosActualizacion();
         try {
             const modificados = await this.modelo.actualizar(id, datosActualizados);
             if(modificados > 0) {
-                this.vista.mostrarMensaje('Cliente actualizado exitosamente');
+                this.vista.mostrarMensaje('Proyecto actualizado exitosamente');
             } else {
-                this.vista.mostrarMensaje('No se encontró el cliente o no se realizaron cambios');
+                this.vista.mostrarMensaje('No se encontró el proyecto o no se realizaron cambios');
             }
         } catch(error) {
             this.vista.mostrarMensaje(`Error: ${error.message}`);
         }
     }
     
-    async eliminarCliente() {
-        const id = this.vista.pedirIdCliente();
+    async eliminarProyecto() {
+        const id = this.vista.pedirIdProyecto();
         try {
             const eliminados = await this.modelo.eliminar(id);
             if(eliminados > 0) {
-                this.vista.mostrarMensaje('Cliente eliminado exitosamente');
+                this.vista.mostrarMensaje('Proyecto eliminado exitosamente');
             } else {
-                this.vista.mostrarMensaje('No se encontró el cliente');
+                this.vista.mostrarMensaje('No se encontró el proyecto');
             }
         } catch(error) {
             this.vista.mostrarMensaje(`Error: ${error.message}`);
@@ -63,4 +63,4 @@ class ClienteController {
     }
 }
 
-module.exports = ClienteController;
+module.exports = ProyectoController;

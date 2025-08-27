@@ -1,54 +1,81 @@
-// /views/clienteView.js
 const prompt = require('prompt-sync')();
 
 class ClienteView {
-  askName() {
-    return prompt('Nombre: ').trim();
-  }
-
-  askCompany() {
-    return prompt('Empresa: ').trim();
-  }
-
-  askContact() {
-    return prompt('Contacto: ').trim();
-  }
-
-  askMail() {
-    return prompt('Correo: ').trim();
-  }
-
-  askPhone() {
-    return prompt('Teléfono: ').trim();
-  }
-
-  askPassword(msg = 'Contraseña: ') {
-    return prompt.hide(msg).trim();
-  }
-
-  askPasswordConfirm() {
-    return prompt.hide('Confirma tu contraseña: ').trim();
-  }
-
-  askId(action = 'gestionar') {
-    return Number(prompt(`ID del cliente a ${action}: `).trim());
-  }
-
-  showMessage(msg) {
-    console.log(msg);
-  }
-
-  showList(clientes) {
-    console.log('\n=== Lista de Clientes ===');
-    if (!clientes.length) {
-      console.log('No hay clientes registrados.');
-      return;
+    pedirDatosCliente() {
+        const nombre = prompt('Ingrese el nombre del cliente: ');
+        const empresa = prompt('Ingrese la empresa: ');
+        const email = prompt('Ingrese el email: ');
+        const telefono = prompt('Ingrese el teléfono: ');
+        const direccion = prompt('Ingrese la dirección: ');
+        
+        return {
+            nombre,
+            empresa,
+            email,
+            telefono,
+            direccion,
+            fechaRegistro: new Date(),
+            activo: true
+        };
     }
-    clientes.forEach(c => {
-      console.log(`[${c.clienteId}] ${c.nombre} - ${c.empresa} (${c.correo}) - ${c.telefono} - Estado: ${c.estado}`);
-    });
-    console.log('==========================\n');
-  }
+    
+    pedirIdCliente() {
+        return prompt('Ingrese el ID del cliente: ');
+    }
+    
+    pedirDatosActualizacion() {
+        console.log('Ingrese los nuevos datos (deje en blanco para no modificar):');
+        const nombre = prompt('Nuevo nombre: ') || undefined;
+        const empresa = prompt('Nueva empresa: ') || undefined;
+        const email = prompt('Nuevo email: ') || undefined;
+        const telefono = prompt('Nuevo teléfono: ') || undefined;
+        const direccion = prompt('Nueva dirección: ') || undefined;
+        
+        const datosActualizados = {};
+        if(nombre) datosActualizados.nombre = nombre;
+        if(empresa) datosActualizados.empresa = empresa;
+        if(email) datosActualizados.email = email;
+        if(telefono) datosActualizados.telefono = telefono;
+        if(direccion) datosActualizados.direccion = direccion;
+        
+        return datosActualizados;
+    }
+    
+    mostrarMensaje(msg) {
+        console.log(msg);
+    }
+    
+    mostrarClientes(clientes) {
+        console.log("\n--Lista de Clientes--\n");
+        clientes.forEach(cliente => {
+            console.log(`ID: ${cliente._id}`);
+            console.log(`Nombre: ${cliente.nombre}`);
+            console.log(`Empresa: ${cliente.empresa}`);
+            console.log(`Email: ${cliente.email}`);
+            console.log(`Teléfono: ${cliente.telefono}`);
+            console.log(`Dirección: ${cliente.direccion}`);
+            console.log(`Fecha Registro: ${cliente.fechaRegistro}`);
+            console.log(`Activo: ${cliente.activo}`);
+            console.log("---------------------");
+        });
+    }
+    
+    mostrarCliente(cliente) {
+        if(!cliente) {
+            console.log('Cliente no encontrado');
+            return;
+        }
+        
+        console.log("\n--Datos del Cliente--\n");
+        console.log(`ID: ${cliente._id}`);
+        console.log(`Nombre: ${cliente.nombre}`);
+        console.log(`Empresa: ${cliente.empresa}`);
+        console.log(`Email: ${cliente.email}`);
+        console.log(`Teléfono: ${cliente.telefono}`);
+        console.log(`Dirección: ${cliente.direccion}`);
+        console.log(`Fecha Registro: ${cliente.fechaRegistro}`);
+        console.log(`Activo: ${cliente.activo}`);
+    }
 }
 
 module.exports = ClienteView;
