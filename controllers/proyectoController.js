@@ -1,5 +1,5 @@
-const ProyectoModel = require('../Models/proyectoModel');
-const ProyectoView = require('../Views/proyectoView');
+const ProyectoModel = require('../models/proyectoModel');
+const ProyectoView = require('../views/proyectoView');
 
 class ProyectoController {
     constructor() {

@@ -1,64 +1,64 @@
-const PropuestaModel = require('../Models/propuestaModel');
-const PropuestaView = require('../Views/propuestaView');
+const ContratoModel = require('../models/contratoModel');
+const ContratoView = require('../views/contratoView');
 
-class PropuestaController {
+class ContratoController {
     constructor() {
-        this.modelo = new PropuestaModel();
-        this.vista = new PropuestaView();
+        this.modelo = new ContratoModel();
+        this.vista = new ContratoView();
     }
     
-    async crearPropuesta() {
-        const datos = this.vista.pedirDatosPropuesta();
+    async crearContrato() {
+        const datos = this.vista.pedirDatosContrato();
         try {
             const id = await this.modelo.crear(datos);
-            this.vista.mostrarMensaje(`Propuesta creada con el ID: ${id}`);
+            this.vista.mostrarMensaje(`Contrato creado con el ID: ${id}`);
         } catch(error) {
             this.vista.mostrarMensaje(`Error: ${error.message}`);
         }
     }
     
-    async mostrarPropuestas() {
+    async mostrarContratos() {
         try {
-            const propuestas = await this.modelo.listar();
-            this.vista.mostrarPropuestas(propuestas);
+            const contratos = await this.modelo.listar();
+            this.vista.mostrarContratos(contratos);
         } catch(error) {
             this.vista.mostrarMensaje(`Error: ${error.message}`);
         }
     }
     
-    async buscarPropuesta() {
-        const id = this.vista.pedirIdPropuesta();
+    async buscarContrato() {
+        const id = this.vista.pedirIdContrato();
         try {
-            const propuesta = await this.modelo.buscarPorId(id);
-            this.vista.mostrarPropuesta(propuesta);
+            const contrato = await this.modelo.buscarPorId(id);
+            this.vista.mostrarContrato(contrato);
         } catch(error) {
             this.vista.mostrarMensaje(`Error: ${error.message}`);
         }
     }
     
-    async actualizarPropuesta() {
-        const id = this.vista.pedirIdPropuesta();
+    async actualizarContrato() {
+        const id = this.vista.pedirIdContrato();
         const datosActualizados = this.vista.pedirDatosActualizacion();
         try {
             const modificados = await this.modelo.actualizar(id, datosActualizados);
             if(modificados > 0) {
-                this.vista.mostrarMensaje('Propuesta actualizada exitosamente');
+                this.vista.mostrarMensaje('Contrato actualizado exitosamente');
             } else {
-                this.vista.mostrarMensaje('No se encontró la propuesta o no se realizaron cambios');
+                this.vista.mostrarMensaje('No se encontró el contrato o no se realizaron cambios');
             }
         } catch(error) {
             this.vista.mostrarMensaje(`Error: ${error.message}`);
         }
     }
     
-    async eliminarPropuesta() {
-        const id = this.vista.pedirIdPropuesta();
+    async eliminarContrato() {
+        const id = this.vista.pedirIdContrato();
         try {
             const eliminados = await this.modelo.eliminar(id);
             if(eliminados > 0) {
-                this.vista.mostrarMensaje('Propuesta eliminada exitosamente');
+                this.vista.mostrarMensaje('Contrato eliminado exitosamente');
             } else {
-                this.vista.mostrarMensaje('No se encontró la propuesta');
+                this.vista.mostrarMensaje('No se encontró el contrato');
             }
         } catch(error) {
             this.vista.mostrarMensaje(`Error: ${error.message}`);
@@ -66,4 +66,4 @@ class PropuestaController {
     }
 }
 
-module.exports = PropuestaController;
+module.exports = ContratoController;

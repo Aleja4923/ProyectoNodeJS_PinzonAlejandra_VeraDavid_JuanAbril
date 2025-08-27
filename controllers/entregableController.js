@@ -1,5 +1,5 @@
-const EntregableModel = require('./Models/entregableModel');
-const EntregableView = require('./Views/entregableView');
+const EntregableModel = require('../models/entregableModel');
+const EntregableView = require('../views/entregableView');
 
 class EntregableController {
     constructor() {

@@ -1,5 +1,5 @@
-const ClienteModel = require('../Models/clienteModel');
-const ClienteView = require('../Views/clienteView');
+const ClienteModel = require('./models/clienteModel');
+const ClienteView = require('./views/clienteView');
 
 class ClienteController {
     constructor() {

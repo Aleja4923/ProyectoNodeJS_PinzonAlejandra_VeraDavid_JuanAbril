@@ -3,8 +3,8 @@ const MainView = require('./Views/mainView');
 
 // Importar controladores
 const ClienteController = require('./Controllers/clienteController');
-const PropuestaController = require('/Controllers/propuestaController');
-const ProyectoController = require('/Controllers/proyectoController');
+const PropuestaController = require('./Controllers/propuestaController');
+const ProyectoController = require('./Controllers/proyectoController');
 const ContratoController = require('./Controllers/contratoController');
 const EntregableController = require('./Controllers/entregableController');
 

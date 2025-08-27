@@ -69,3 +69,5 @@ class ClienteModel {
         return result.deletedCount;
     }
 }
+
+module.exports = ClienteModel;
