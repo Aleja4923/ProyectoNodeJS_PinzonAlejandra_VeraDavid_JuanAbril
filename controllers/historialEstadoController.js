@@ -1,7 +1,7 @@
 const HistorialEstadoModel = require('../models/historialEstadoModel');
 const HistorialEstadoView = require('../views/historialEstadoView');
 
-class HistorialEstadoController {
+class historialEstadoController {
     constructor() {
         this.modelo = new HistorialEstadoModel();
         this.vista = new HistorialEstadoView();

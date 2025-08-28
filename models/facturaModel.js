@@ -1,7 +1,7 @@
 const {ObjectId} = require('mongodb');
 const connectDB = require('../db');
 
-class FacturaModel {
+class facturaModel {
     constructor() {
         this.schema = {
             proyectoId: 'string',
@@ -72,4 +72,4 @@ class FacturaModel {
     }
 }
 
-module.exports = FacturaModel;
+module.exports = facturaModel;

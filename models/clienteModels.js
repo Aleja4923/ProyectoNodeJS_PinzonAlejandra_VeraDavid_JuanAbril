@@ -1,7 +1,7 @@
 const {ObjectId} = require('mongodb');
 const connectDB = require('../db');
 
-class ClienteModel {
+class clienteModel {
     constructor() {
         this.schema = {
             nombre: 'string',
@@ -70,4 +70,4 @@ class ClienteModel {
     }
 }
 
-module.exports = ClienteModel;
+module.exports = clienteModel;

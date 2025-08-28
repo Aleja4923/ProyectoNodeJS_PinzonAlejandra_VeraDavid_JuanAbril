@@ -1,6 +1,6 @@
 const prompt = require('prompt-sync')();
 
-class FacturaView {
+class facturaView {
     pedirDatosFactura() {
         const proyectoId = prompt('Ingrese el ID del proyecto: ');
         const fechaVencimiento = new Date(prompt('Ingrese la fecha de vencimiento (YYYY-MM-DD): '));
@@ -59,3 +59,5 @@ class FacturaView {
         });
     }
 }
+
+module.exports = facturaView;

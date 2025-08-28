@@ -1,6 +1,6 @@
 const prompt = require('prompt-sync')();
 
-class ContratoView {
+class contratoView {
     pedirDatosContrato() {
         const proyectoId = prompt('Ingrese el ID del proyecto: ');
         const fechaFin = new Date(prompt('Ingrese la fecha fin del contrato (YYYY-MM-DD): '));
@@ -66,4 +66,4 @@ class ContratoView {
     }
 }
 
-module.exports = ContratoView;
+module.exports = contratoView;

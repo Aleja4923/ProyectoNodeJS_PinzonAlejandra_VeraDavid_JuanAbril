@@ -1,5 +1,5 @@
-const ContratoModel = require('./Models/contratoModel');
-const ContratoView = require('./Views/contratoView');
+const ContratoModel = require('./models/contratoModel');
+const ContratoView = require('./views/contratoView');
 
 class ContratoController {
     constructor() {

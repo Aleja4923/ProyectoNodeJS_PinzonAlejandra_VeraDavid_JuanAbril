@@ -1,6 +1,6 @@
 const prompt = require('prompt-sync')();
 
-class ProyectoView {
+class proyectoView {
     pedirDatosProyecto() {
         const clienteId = prompt('Ingrese el ID del cliente: ');
         const propuestaId = prompt('Ingrese el ID de la propuesta: ');
@@ -74,4 +74,4 @@ class ProyectoView {
     }
 }
 
-module.exports = ProyectoView;
+module.exports = proyectoView;

@@ -1,6 +1,6 @@
 const prompt = require('prompt-sync')();
 
-class EntregableView {
+class entregableView {
     pedirDatosEntregable() {
         const proyectoId = prompt('Ingrese el ID del proyecto: ');
         const fechaLimite = new Date(prompt('Ingrese la fecha límite (YYYY-MM-DD): '));
@@ -62,4 +62,4 @@ class EntregableView {
     }
 }
 
-module.exports = EntregableView;
+module.exports = entregableView;

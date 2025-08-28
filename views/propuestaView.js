@@ -1,6 +1,6 @@
 const prompt = require('prompt-sync')();
 
-class PropuestaView {
+class propuestaView {
     pedirDatosPropuesta() {
         const clienteId = prompt('Ingrese el ID del cliente: ');
         const valor = parseFloat(prompt('Ingrese el valor de la propuesta: '));
@@ -66,4 +66,4 @@ class PropuestaView {
     }
 }
 
-module.exports = PropuestaView;
+module.exports = propuestaView;

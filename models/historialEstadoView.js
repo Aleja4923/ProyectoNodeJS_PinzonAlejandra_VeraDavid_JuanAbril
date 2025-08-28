@@ -1,6 +1,6 @@
 const prompt = require('prompt-sync')();
 
-class HistorialEstadoView {
+class historialEstadoView {
     pedirDatosHistorial() {
         const proyectoId = prompt('Ingrese el ID del proyecto: ');
         const estadoAnterior = prompt('Ingrese el estado anterior: ');
@@ -69,4 +69,4 @@ class HistorialEstadoView {
     }
 }
 
-module.exports = HistorialEstadoView;
+module.exports = historialEstadoView;

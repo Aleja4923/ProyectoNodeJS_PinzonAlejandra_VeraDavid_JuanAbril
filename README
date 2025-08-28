@@ -1,0 +1,76 @@
+# Gestor de Portafolio Freelance
+
+## Descripción del proyecto
+Aplicación de consola desarrollada en Node.js para gestionar un portafolio de trabajo freelance. Permite administrar clientes, propuestas, proyectos, contratos y entregables almacenados en una base de datos MongoDB.
+
+## Instrucciones de instalación y uso
+1. Clonar el repositorio.
+2. Crear un archivo .env con las variables URI y DB_NAME para la conexión a MongoDB.
+3. Instalar dependencias con npm install.
+4. Ejecutar la aplicación con node app.js o npm run . .
+
+## Estructura del proyecto
+```
+gestor-portafolio-freelance/
+│
+├── models/                          # Modelos de datos (8 archivos)
+│   ├── clienteModel.js              # Modelo para gestión de clientes
+│   ├── propuestaModel.js            # Modelo para propuestas comerciales
+│   ├── proyectoModel.js             # Modelo para proyectos
+│   ├── contratoModel.js             # Modelo para contratos legales
+│   ├── entregableModel.js           # Modelo para entregables
+│   ├── transaccionModel.js          # Modelo para transacciones financieras
+│   ├── facturaModel.js              # Modelo para facturas
+│   └── historialEstadoModel.js      # Modelo para historial de cambios
+│
+├── views/                           # Vistas de interfaz de usuario (9 archivos)
+│   ├── mainView.js                  # Vista principal con menús
+│   ├── clienteView.js               # Vista para gestión de clientes
+│   ├── propuestaView.js             # Vista para propuestas
+│   ├── proyectoView.js              # Vista para proyectos
+│   ├── contratoView.js              # Vista para contratos
+│   ├── entregableView.js            # Vista para entregables
+│   ├── transaccionView.js           # Vista para transacciones
+│   ├── facturaView.js               # Vista para facturas
+│   └── historialEstadoView.js       # Vista para historial
+│
+├── controllers/                     # Controladores MVC (8 archivos)
+│   ├── clienteController.js         # Controlador de clientes
+│   ├── propuestaController.js       # Controlador de propuestas
+│   ├── proyectoController.js        # Controlador de proyectos
+│   ├── contratoController.js        # Controlador de contratos
+│   ├── entregableController.js      # Controlador de entregables
+│   ├── transaccionController.js     # Controlador de transacciones
+│   ├── facturaController.js         # Controlador de facturas
+│   └── historialEstadoController.js # Controlador de historial
+│
+├── app.js                           # Aplicación principal
+├── db.js                            # Configuración de base de datos
+├── package.json                     # Dependencias del proyecto
+├── .env                             # Variables de entorno (crear)
+├── .env.example                     # Ejemplo de configuración
+├── README.md                        # Documentación principal
+└── .gitignore                       # Archivos ignorados por Git
+
+```
+
+## Principios SOLID aplicados
+- **Responsabilidad Única:** cada capa se encarga de un aspecto distinto; por ejemplo,controllers/clienteController.js administra la lógica de clientes mientras delega la persistencia en models/clienteModels.js y la interacción al usuario en `views/clienteView.js, manteniendo responsabilidades separadas.
+- **Abierto/Cerrado:** las entidades están encapsuladas en clases independientes; para agregar una nueva basta con crear un modelo, vista y controlador siguiendo el mismo esquema sin modificar los existentes, como ocurre con controllers/proyectoController.js y controllers/clienteController.js.
+- **Sustitución de Liskov:** los controladores solo utilizan los métodos públicos (crear, listar, buscarPorId, actualizar, eliminar) de sus modelos, lo que permite sustituir un modelo por otro que implemente la misma interfaz sin cambiar el controlador.
+- **Segregación de Interfaces:** cada vista expone únicamente las operaciones necesarias de su entidad; views/clienteView.js, por ejemplo, define métodos como pedirDatosCliente o mostrarClientes sin forzar a otros componentes a implementar funcionalidades que no usan.
+- **Inversión de Dependencias:** los controladores dependen de modelos y vistas, no de detalles de infraestructura. Los modelos encapsulan la conexión a la base de datos mediante db.js, de modo que el controlador opera sobre abstracciones en lugar de directamente sobre MongoDB.
+
+## Patrones de diseño usados
+- **Modelo-Vista-Controlador (MVC):** controllers, models y views separan responsabilidades; en app.js se instancian controladores que interactúan con sus vistas para orquestar la aplicación.
+- **Singleton:** db.js mantiene una única instancia de Mongo mediante connect, asegurando que todas las operaciones utilicen la misma conexión.
+- **Objeto de Acceso a Datos (DAO):** cada modelo encapsula las operaciones CRUD contra la base; models/clienteModels.js interactúa con la colección clientes a través de métodos como crear, listar o eliminar.
+
+## Consideraciones técnicas
+- Requiere Node.js 16 o superior.
+- Las entidades se almacenan en MongoDB utilizando la librería oficial del cliente.
+- La interacción con el usuario se realiza mediante prompt-sync en la consola.
+- El proyecto no incluye pruebas automatizadas; el script de npm test está vacío.
+
+## Créditos
+Alejandra Pinzon Alvarez

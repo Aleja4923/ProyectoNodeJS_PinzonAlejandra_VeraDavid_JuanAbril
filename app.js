@@ -1,12 +1,12 @@
 // Importar vista principal
-const MainView = require('./Views/mainView');
+const MainView = require('./views/mainView');
 
 // Importar controladores
-const ClienteController = require('./Controllers/clienteController');
-const PropuestaController = require('./Controllers/propuestaController');
-const ProyectoController = require('./Controllers/proyectoController');
-const ContratoController = require('./Controllers/contratoController');
-const EntregableController = require('./Controllers/entregableController');
+const ClienteController = require('./controllers/clienteController');
+const PropuestaController = require('./controllers/propuestaController');
+const ProyectoController = require('./controllers/proyectoController');
+const ContratoController = require('./controllers/contratoController');
+const EntregableController = require('./controllers/entregableController');
 
 // Instanciar componentes
 const mainView = new MainView();

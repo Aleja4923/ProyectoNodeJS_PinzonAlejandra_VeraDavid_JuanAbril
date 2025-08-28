@@ -1,6 +1,6 @@
 const prompt = require('prompt-sync')();
 
-class ClienteView {
+class clienteView {
     pedirDatosCliente() {
         const nombre = prompt('Ingrese el nombre del cliente: ');
         const empresa = prompt('Ingrese la empresa: ');
@@ -78,4 +78,4 @@ class ClienteView {
     }
 }
 
-module.exports = ClienteView;
+module.exports = clienteView;
