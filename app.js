@@ -18,6 +18,41 @@ const proyectoController = new ProyectoController();
 const contratoController = new ContratoController();
 const entregableController = new EntregableController();
 
+async function main() {
+    let salir = false;
+
+    while (!salir) {
+        const opcion = mainView.mostrarMenuPrincipal();
+        
+        switch (opcion) {
+            case 1:
+                await gestionarClientes();
+                break;
+            case 2:
+                await gestionarPropuestas();
+                break;
+            case 3:
+                await gestionarProyectos();
+                break;
+            case 4:
+                await gestionarContratos();
+                break;
+            case 5:
+                await gestionarEntregables();
+                break;
+            case 6:
+                mainView.mostrarMensaje("Saliendo del sistema...");
+                salir = true;
+                break;
+            default:
+                mainView.mostrarMensaje("Opción inválida.");
+        }
+    }
+}
+
+// Llamada a la función principal
+main();
+
 async function gestionarClientes() {
     let continuar = true;
     while(continuar) {
