@@ -123,28 +123,11 @@ async function gestionarProyectos() {
     }
 }
 
-async function main() {
-    let continuar = true;
-    
-    while(continuar) {
-        try {
-            const opcion = mainView.mostrarMenuPrincipal();
-            
-            switch(opcion) {
-                case 1:
-                    await gestionarClientes();
-                    break;
-                case 2:
-                    await gestionarPropuestas();
-                    break;
-                case 3:
-                    await gestionarProyectos();
-                    break;
 async function gestionarContratos() {
     let continuar = true;
     while(continuar) {
         const opcion = mainView.mostrarMenuCRUD('contratos');
-        
+
         switch(opcion) {
             case 1:
                 await contratoController.crearContrato();
@@ -168,7 +151,7 @@ async function gestionarContratos() {
                 mainView.mostrarMensaje('Opción no válida');
                 break;
         }
-        
+
         if(continuar) {
             mainView.pausar();
         }
@@ -179,7 +162,7 @@ async function gestionarEntregables() {
     let continuar = true;
     while(continuar) {
         const opcion = mainView.mostrarMenuCRUD('entregables');
-        
+
         switch(opcion) {
             case 1:
                 await entregableController.crearEntregable();
@@ -203,12 +186,36 @@ async function gestionarEntregables() {
                 mainView.mostrarMensaje('Opción no válida');
                 break;
         }
-        
+
         if(continuar) {
             mainView.pausar();
         }
     }
 }
+
+async function main() {
+    let continuar = true;
+
+    while(continuar) {
+        try {
+            const opcion = mainView.mostrarMenuPrincipal();
+
+            switch(opcion) {
+                case 1:
+                    await gestionarClientes();
+                    break;
+                case 2:
+                    await gestionarPropuestas();
+                    break;
+                case 3:
+                    await gestionarProyectos();
+                    break;
+                case 4:
+                    await gestionarContratos();
+                    break;
+                case 5:
+                    await gestionarEntregables();
+                    break;
                 case 6:
                     mainView.mostrarMensaje('Gestión de Transacciones - Por implementar');
                     mainView.pausar();
