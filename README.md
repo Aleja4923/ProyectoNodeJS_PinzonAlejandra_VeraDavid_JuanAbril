@@ -1,3 +1,65 @@
+<h3 align="center";>
+<b>GESTOR DE PORTAFOLIO DE PROYECTOS FREELANCE</b>
+</h3>
+
+<br>
+<br>
+<br>
+
+<h3 align="center";>
+
+**Alejandra Pinzon Alvarez**
+
+</h3>
+
+<br>
+<br>
+<br>
+<br>
+
+<h3 align="center";>
+
+**S1**
+
+</h3>
+
+<h3 align="center";>
+
+**Pedro Felipe Gómez Bonilla**
+
+</h3>
+
+<br>
+<br>
+<br>
+<br>
+
+<h3 align="center";>
+
+**CAMPUSLANDS**
+
+</h3>
+
+<h3 align="center";>
+
+**RUTA NODE**
+
+</h3>
+
+<h3 align="center";>
+
+**BUCARAMANGA, SANTANDER**
+
+</h3>
+
+<h3 align="center";>
+
+**2025**
+
+</h3>
+
+---
+
 # Gestor de Portafolio Freelance
 
 ## Descripción del proyecto
@@ -70,7 +132,6 @@ gestor-portafolio-freelance/
 - Requiere Node.js 16 o superior.
 - Las entidades se almacenan en MongoDB utilizando la librería oficial del cliente.
 - La interacción con el usuario se realiza mediante prompt-sync en la consola.
-- El proyecto no incluye pruebas automatizadas; el script de npm test está vacío.
 
 ## Créditos
 Alejandra Pinzon Alvarez
