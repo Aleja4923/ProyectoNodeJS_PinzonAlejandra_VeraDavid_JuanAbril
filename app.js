@@ -11,7 +11,7 @@ const EntregableController = require('./controllers/entregableController');
 // Instanciar componentes
 const mainView = new MainView();
 
-// Instanciar controladores (cada uno maneja su propio modelo y vista)
+
 const clienteController = new ClienteController();
 const propuestaController = new PropuestaController();
 const proyectoController = new ProyectoController();
@@ -50,7 +50,6 @@ async function main() {
     }
 }
 
-// Llamada a la función principal
 main();
 
 async function gestionarClientes() {

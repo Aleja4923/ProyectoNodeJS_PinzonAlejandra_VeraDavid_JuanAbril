@@ -25,11 +25,11 @@ class clienteView {
     
     pedirDatosActualizacion() {
         console.log('Ingrese los nuevos datos (deje en blanco para no modificar):');
-        const nombre = prompt('Nuevo nombre: ') || undefined;
-        const empresa = prompt('Nueva empresa: ') || undefined;
-        const email = prompt('Nuevo email: ') || undefined;
-        const telefono = prompt('Nuevo teléfono: ') || undefined;
-        const direccion = prompt('Nueva dirección: ') || undefined;
+        const nombre = prompt('Nuevo nombre: ') ;
+        const empresa = prompt('Nueva empresa: ') ;
+        const email = prompt('Nuevo email: ') ;
+        const telefono = prompt('Nuevo teléfono: ');
+        const direccion = prompt('Nueva dirección: ') ;
         
         const datosActualizados = {};
         if(nombre) datosActualizados.nombre = nombre;

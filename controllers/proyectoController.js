@@ -2,68 +2,35 @@ const ProyectoModel = require('../models/proyectoModel');
 const ProyectoView = require('../views/proyectoView');
 
 class ProyectoController {
-    constructor() {
-        this.modelo = new ProyectoModel();
-        this.vista = new ProyectoView();
-    }
-    
-    async crearProyecto() {
-        const datos = this.vista.pedirDatosProyecto();
-        try {
-            const id = await this.modelo.crear(datos);
-            this.vista.mostrarMensaje(`Proyecto creado con el ID: ${id}`);
-        } catch(error) {
-            this.vista.mostrarMensaje(`Error: ${error.message}`);
-        }
-    }
-    
-    async mostrarProyectos() {
-        try {
-            const proyectos = await this.modelo.listar();
-            this.vista.mostrarProyectos(proyectos);
-        } catch(error) {
-            this.vista.mostrarMensaje(`Error: ${error.message}`);
-        }
-    }
-    
-    async buscarProyecto() {
-        const id = this.vista.pedirIdProyecto();
-        try {
-            const proyecto = await this.modelo.buscarPorId(id);
-            this.vista.mostrarProyecto(proyecto);
-        } catch(error) {
-            this.vista.mostrarMensaje(`Error: ${error.message}`);
-        }
-    }
-    
-    async actualizarProyecto() {
-        const id = this.vista.pedirIdProyecto();
-        const datosActualizados = this.vista.pedirDatosActualizacion();
-        try {
-            const modificados = await this.modelo.actualizar(id, datosActualizados);
-            if(modificados > 0) {
-                this.vista.mostrarMensaje('Proyecto actualizado exitosamente');
-            } else {
-                this.vista.mostrarMensaje('No se encontró el proyecto o no se realizaron cambios');
-            }
-        } catch(error) {
-            this.vista.mostrarMensaje(`Error: ${error.message}`);
-        }
-    }
-    
-    async eliminarProyecto() {
-        const id = this.vista.pedirIdProyecto();
-        try {
-            const eliminados = await this.modelo.eliminar(id);
-            if(eliminados > 0) {
-                this.vista.mostrarMensaje('Proyecto eliminado exitosamente');
-            } else {
-                this.vista.mostrarMensaje('No se encontró el proyecto');
-            }
-        } catch(error) {
-            this.vista.mostrarMensaje(`Error: ${error.message}`);
-        }
-    }
+  constructor() {
+    this.modelo = new ProyectoModel();
+    this.vista = new ProyectoView();
+  }
+
+  static async create(data) {
+    const payload = createProyectoFactory(data);
+    const res = await Proyecto.create(payload);
+    return { _id: res.insertedId, ...payload };
+  }
+
+  static async listAll() {
+    return await Proyecto.list();
+  }
+
+  static async findById(id) {
+    const _id = typeof id === "string" ? new ObjectId(id) : id;
+    return await Proyecto.findById(_id);
+  }
+
+  static async updateProyecto(id, data) {
+    const _id = typeof id === "string" ? new ObjectId(id) : id;
+    return await Proyecto.updateById(_id, data);
+  }
+
+  static async deleteProyecto(id) {
+    const _id = typeof id === "string" ? new ObjectId(id) : id;
+    return await Proyecto.deleteById(_id);
+  }
 }
 
 module.exports = ProyectoController;

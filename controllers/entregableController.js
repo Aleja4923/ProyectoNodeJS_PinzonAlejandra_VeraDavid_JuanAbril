@@ -2,68 +2,36 @@ const EntregableModel = require('../models/entregableModel');
 const EntregableView = require('../views/entregableView');
 
 class EntregableController {
-    constructor() {
-        this.modelo = new EntregableModel();
-        this.vista = new EntregableView();
-    }
-    
-    async crearEntregable() {
-        const datos = this.vista.pedirDatosEntregable();
-        try {
-            const id = await this.modelo.crear(datos);
-            this.vista.mostrarMensaje(`Entregable creado con el ID: ${id}`);
-        } catch(error) {
-            this.vista.mostrarMensaje(`Error: ${error.message}`);
-        }
-    }
-    
-    async mostrarEntregables() {
-        try {
-            const entregables = await this.modelo.listar();
-            this.vista.mostrarEntregables(entregables);
-        } catch(error) {
-            this.vista.mostrarMensaje(`Error: ${error.message}`);
-        }
-    }
-    
-    async buscarEntregable() {
-        const id = this.vista.pedirIdEntregable();
-        try {
-            const entregable = await this.modelo.buscarPorId(id);
-            this.vista.mostrarEntregable(entregable);
-        } catch(error) {
-            this.vista.mostrarMensaje(`Error: ${error.message}`);
-        }
-    }
-    
-    async actualizarEntregable() {
-        const id = this.vista.pedirIdEntregable();
-        const datosActualizados = this.vista.pedirDatosActualizacion();
-        try {
-            const modificados = await this.modelo.actualizar(id, datosActualizados);
-            if(modificados > 0) {
-                this.vista.mostrarMensaje('Entregable actualizado exitosamente');
-            } else {
-                this.vista.mostrarMensaje('No se encontró el entregable o no se realizaron cambios');
-            }
-        } catch(error) {
-            this.vista.mostrarMensaje(`Error: ${error.message}`);
-        }
-    }
-    
-    async eliminarEntregable() {
-        const id = this.vista.pedirIdEntregable();
-        try {
-            const eliminados = await this.modelo.eliminar(id);
-            if(eliminados > 0) {
-                this.vista.mostrarMensaje('Entregable eliminado exitosamente');
-            } else {
-                this.vista.mostrarMensaje('No se encontró el entregable');
-            }
-        } catch(error) {
-            this.vista.mostrarMensaje(`Error: ${error.message}`);
-        }
-    }
+  constructor() {
+    this.modelo = new EntregableModel();
+    this.vista = new EntregableView();
+  }
+
+  static async create(data) {
+    const payload = createEntregableFactory(data);
+    const res = await Entregable.create(payload);
+    return { _id: res.insertedId, ...payload };
+  }
+
+  static async listAll() {
+    return await Entregable.list();
+  }
+
+  static async findById(id) {
+    const _id = typeof id === "string" ? new ObjectId(id) : id;
+    return await Entregable.findById(_id);
+  }
+
+  static async updateEntregable(id, data) {
+    const _id = typeof id === "string" ? new ObjectId(id) : id;
+    return await Entregable.updateById(_id, data);
+  }
+
+  static async deleteEntregable(id) {
+    const _id = typeof id === "string" ? new ObjectId(id) : id;
+    return await Entregable.deleteById(_id);
+  }
 }
+
 
 module.exports = EntregableController;
