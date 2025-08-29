@@ -19,9 +19,9 @@ const contratoController = new ContratoController();
 const entregableController = new EntregableController();
 
 async function main() {
-    let salir = false;
+    let continuar = true;
 
-    while (!salir) {
+    while (continuar) {
         const opcion = mainView.mostrarMenuPrincipal();
         
         switch (opcion) {
@@ -41,8 +41,8 @@ async function main() {
                 await gestionarEntregables();
                 break;
             case 6:
+                continuar=false
                 mainView.mostrarMensaje("Saliendo del sistema...");
-                salir = true;
                 break;
             default:
                 mainView.mostrarMensaje("Opción inválida.");
@@ -55,7 +55,7 @@ main();
 async function gestionarClientes() {
     let continuar = true;
     while(continuar) {
-        const opcion = mainView.mostrarMenuCRUD('clientes');
+        const opcion = mainView.mostrarMenuCRUD('Cliente');
         
         switch(opcion) {
             case 1:
@@ -81,11 +81,8 @@ async function gestionarClientes() {
                 break;
         }
         
-        if(continuar) {
-            mainView.pausar();
         }
     }
-}
 
 async function gestionarPropuestas() {
     let continuar = true;

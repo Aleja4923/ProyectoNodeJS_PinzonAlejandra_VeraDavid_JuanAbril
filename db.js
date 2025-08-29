@@ -22,6 +22,6 @@ async function disconnect(){
     if(client) await client.close();
 }
 
-connect();
+
 
 module.exports={connect,disconnect};

@@ -23,9 +23,6 @@ class mainView {
         return parseInt(prompt("Seleccione una opción: "));
     }
     
-    mostrarMensaje(mensaje) {
-        console.log(mensaje);
-    }
     
     pausar() {
         prompt("Presione Enter para continuar...");
