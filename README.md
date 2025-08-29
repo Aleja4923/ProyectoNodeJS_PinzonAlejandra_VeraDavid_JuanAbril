@@ -132,7 +132,6 @@ gestor-portafolio-freelance/
 - Requiere Node.js 16 o superior.
 - Las entidades se almacenan en MongoDB utilizando la librería oficial del cliente.
 - La interacción con el usuario se realiza mediante prompt-sync en la consola.
-- El proyecto no incluye pruebas automatizadas; el script de npm test está vacío.
 
 ## Créditos
 Alejandra Pinzon Alvarez
