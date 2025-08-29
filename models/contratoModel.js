@@ -30,7 +30,7 @@ class contratoModel {
         }
         
         const db = await connectDB.connect();
-        const result = await db.collection('contratos').insertOne(contrato);
+        const result = await db.collection('Contrato').insertOne(contrato);
         let idObjeto = result.insertedId;
         await connectDB.disconnect();
         return idObjeto;
@@ -38,21 +38,21 @@ class contratoModel {
     
     async listar() {
         const db = await connectDB.connect();
-        let arreglo = await db.collection('contratos').find().toArray();
+        let arreglo = await db.collection('Contrato').find().toArray();
         await connectDB.disconnect();
         return arreglo;
     }
     
     async buscarPorId(id) {
         const db = await connectDB.connect();
-        const contrato = await db.collection('contratos').findOne({_id: new ObjectId(id)});
+        const contrato = await db.collection('Contrato').findOne({_id: new ObjectId(id)});
         await connectDB.disconnect();
         return contrato;
     }
     
     async actualizar(id, datosActualizados) {
         const db = await connectDB.connect();
-        const result = await db.collection('contratos').updateOne(
+        const result = await db.collection('Contrato').updateOne(
             {_id: new ObjectId(id)}, 
             {$set: datosActualizados}
         );
@@ -62,7 +62,7 @@ class contratoModel {
     
     async eliminar(id) {
         const db = await connectDB.connect();
-        const result = await db.collection('contratos').deleteOne({_id: new ObjectId(id)});
+        const result = await db.collection('Contrato').deleteOne({_id: new ObjectId(id)});
         await connectDB.disconnect();
         return result.deletedCount;
     }
