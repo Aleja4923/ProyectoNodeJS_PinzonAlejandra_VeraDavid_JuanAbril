@@ -21,49 +21,40 @@ class entregableModel {
         return true;
     }
     
-    async crear(entregable) {
+       async crear(entregable) {
         entregable.estado = 'pendiente';
         entregable.fechaEntrega = null;
-        
-        if(!this.validar(entregable)) {
-            throw new Error('Error en el tipo de datos ingresados');
-        }
-        
+
         const db = await connectDB.connect();
-        const result = await db.collection('entregables').insertOne(entregable);
+        const result = await db.collection('Entregable').insertOne(entregable);
         let idObjeto = result.insertedId;
-        await connectDB.disconnect();
         return idObjeto;
     }
-    
+
     async listar() {
         const db = await connectDB.connect();
-        let arreglo = await db.collection('entregables').find().toArray();
-        await connectDB.disconnect();
+        let arreglo = await db.collection('Entregable').find().toArray();
         return arreglo;
     }
-    
+
     async buscarPorId(id) {
         const db = await connectDB.connect();
-        const entregable = await db.collection('entregables').findOne({_id: new ObjectId(id)});
-        await connectDB.disconnect();
+        const entregable = await db.collection('Entregable').findOne({_id: new ObjectId(id)});
         return entregable;
     }
-    
+
     async actualizar(id, datosActualizados) {
         const db = await connectDB.connect();
-        const result = await db.collection('entregables').updateOne(
+        const result = await db.collection('Entregable').updateOne(
             {_id: new ObjectId(id)}, 
             {$set: datosActualizados}
         );
-        await connectDB.disconnect();
         return result.modifiedCount;
     }
-    
+
     async eliminar(id) {
         const db = await connectDB.connect();
-        const result = await db.collection('entregables').deleteOne({_id: new ObjectId(id)});
-        await connectDB.disconnect();
+        const result = await db.collection('Entregable').deleteOne({_id: new ObjectId(id)});
         return result.deletedCount;
     }
 }

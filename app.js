@@ -23,7 +23,7 @@ async function main() {
 
     while (continuar) {
         const opcion = mainView.mostrarMenuPrincipal();
-        
+    
         switch (opcion) {
             case 1:
                 await gestionarClientes();
@@ -87,7 +87,7 @@ async function gestionarClientes() {
 async function gestionarPropuestas() {
     let continuar = true;
     while(continuar) {
-        const opcion = mainView.mostrarMenuCRUD('propuestas');
+        const opcion = mainView.mostrarMenuCRUD('Propuesta');
         
         switch(opcion) {
             case 1:
@@ -154,27 +154,11 @@ async function gestionarProyectos() {
     }
 }
 
-async function main() {
-    let continuar = true;
-    
-    while(continuar) {
-        try {
-            const opcion = mainView.mostrarMenuPrincipal();
-            
-            switch(opcion) {
-                case 1:
-                    await gestionarClientes();
-                    break;
-                case 2:
-                    await gestionarPropuestas();
-                    break;
-                case 3:
-                    await gestionarProyectos();
-                    break;
+
 async function gestionarContratos() {
     let continuar = true;
     while(continuar) {
-        const opcion = mainView.mostrarMenuCRUD('contratos');
+        const opcion = mainView.mostrarMenuCRUD('Contrato');
         
         switch(opcion) {
             case 1:
@@ -209,7 +193,7 @@ async function gestionarContratos() {
 async function gestionarEntregables() {
     let continuar = true;
     while(continuar) {
-        const opcion = mainView.mostrarMenuCRUD('entregables');
+        const opcion = mainView.mostrarMenuCRUD('Entregable');
         
         switch(opcion) {
             case 1:
@@ -240,34 +224,7 @@ async function gestionarEntregables() {
         }
     }
 }
-                case 6:
-                    mainView.mostrarMensaje('Gestión de Transacciones - Por implementar');
-                    mainView.pausar();
-                    break;
-                case 7:
-                    mainView.mostrarMensaje('Gestión de Facturas - Por implementar');
-                    mainView.pausar();
-                    break;
-                case 8:
-                    mainView.mostrarMensaje('Historial de Estados - Por implementar');
-                    mainView.pausar();
-                    break;
-                case 9:
-                    mainView.mostrarMensaje('¡Gracias por usar el Gestor de Portafolio Freelance!');
-                    continuar = false;
-                    break;
-                default:
-                    mainView.mostrarMensaje('Opción no válida');
-                    mainView.pausar();
-                    break;
-            }
-        } catch(error) {
-            mainView.mostrarMensaje(`Error en la aplicación: ${error.message}`);
-            mainView.pausar();
-        }
-    }
-}
-
+  
 // Iniciar la aplicación
 main().catch(error => {
     console.error('Error fatal en la aplicación:', error);
