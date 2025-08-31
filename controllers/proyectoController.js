@@ -6,31 +6,44 @@ class ProyectoController {
     this.modelo = new ProyectoModel();
     this.vista = new ProyectoView();
   }
+    async crear(proyecto) {
+        proyecto.fechaInicio = new Date();
+        proyecto.estado = 'activo';
+        proyecto.progresoPorcentaje = 0;
+        proyecto.fechaFinReal = null;
 
-  static async create(data) {
-    const payload = createProyectoFactory(data);
-    const res = await Proyecto.create(payload);
-    return { _id: res.insertedId, ...payload };
-  }
+        const db = await connectDB.connect();
+        const result = await db.collection('Proyecto').insertOne(proyecto);
+        let idObjeto = result.insertedId;
+        return idObjeto;
+    }
 
-  static async listAll() {
-    return await Proyecto.list();
-  }
+    async listar() {
+        const db = await connectDB.connect();
+        let arreglo = await db.collection('Proyecto').find().toArray();
+        return arreglo;
+    }
 
-  static async findById(id) {
-    const _id = typeof id === "string" ? new ObjectId(id) : id;
-    return await Proyecto.findById(_id);
-  }
+    async buscarPorId(id) {
+        const db = await connectDB.connect();
+        const proyecto = await db.collection('Proyecto').findOne({ _id: new ObjectId(id) });
+        return proyecto;
+    }
 
-  static async updateProyecto(id, data) {
-    const _id = typeof id === "string" ? new ObjectId(id) : id;
-    return await Proyecto.updateById(_id, data);
-  }
+    async actualizar(id, datosActualizados) {
+        const db = await connectDB.connect();
+        const result = await db.collection('Proyecto').updateOne(
+            { _id: new ObjectId(id) },
+            { $set: datosActualizados }
+        );
+        return result.modifiedCount;
+    }
 
-  static async deleteProyecto(id) {
-    const _id = typeof id === "string" ? new ObjectId(id) : id;
-    return await Proyecto.deleteById(_id);
-  }
+    async eliminar(id) {
+        const db = await connectDB.connect();
+        const result = await db.collection('Proyecto').deleteOne({ _id: new ObjectId(id) });
+        return result.deletedCount;
+    }
 }
 
 module.exports = ProyectoController;

@@ -15,7 +15,6 @@ class proyectoModel {
     }
     
     validar(proyecto) {
-        // Validar campos requeridos, permitir fechaFinReal como null inicialmente
         const requiredFields = ['clienteId', 'propuestaId', 'fechaInicio', 'fechaFinEstimada', 'estado', 'progresoPorcentaje'];
         for(let campo of requiredFields) {
             if(typeof proyecto[campo] !== this.schema[campo]) {
@@ -26,49 +25,42 @@ class proyectoModel {
     }
     
     async crear(proyecto) {
-        proyecto.fechaInicio = new Date();
-        proyecto.estado = 'activo';
-        proyecto.progresoPorcentaje = 0;
-        proyecto.fechaFinReal = null;
-        
-        if(!this.validar(proyecto)) {
-            throw new Error('Error en el tipo de datos ingresados');
-        }
-        
+        proyecto.fechaRegistro = new Date();
+        proyecto.activo = true;
+
         const db = await connectDB.connect();
-        const result = await db.collection('proyectos').insertOne(proyecto);
+        const result = await db.collection('Proyecto').insertOne(proyecto);
         let idObjeto = result.insertedId;
-        await connectDB.disconnect();
         return idObjeto;
     }
-    
+
     async listar() {
         const db = await connectDB.connect();
-        let arreglo = await db.collection('proyectos').find().toArray();
+        let arreglo = await db.collection('Proyecto').find().toArray();
         await connectDB.disconnect();
         return arreglo;
     }
-    
+
     async buscarPorId(id) {
         const db = await connectDB.connect();
-        const proyecto = await db.collection('proyectos').findOne({_id: new ObjectId(id)});
+        const proyecto = await db.collection('Proyecto').findOne({_id: new ObjectId(id)});
         await connectDB.disconnect();
         return proyecto;
     }
-    
+
     async actualizar(id, datosActualizados) {
         const db = await connectDB.connect();
-        const result = await db.collection('proyectos').updateOne(
+        const result = await db.collection('Proyecto').updateOne(
             {_id: new ObjectId(id)}, 
             {$set: datosActualizados}
         );
         await connectDB.disconnect();
         return result.modifiedCount;
     }
-    
+
     async eliminar(id) {
         const db = await connectDB.connect();
-        const result = await db.collection('proyectos').deleteOne({_id: new ObjectId(id)});
+        const result = await db.collection('Proyecto').deleteOne({_id: new ObjectId(id)});
         await connectDB.disconnect();
         return result.deletedCount;
     }

@@ -10,7 +10,7 @@ class clienteModel {
         const db = await connectDB.connect();
         const result = await db.collection('Cliente').insertOne(cliente);
         let idObjeto = result.insertedId;
-        return idObjeto;
+        return idObjeto;}
     }
     
     async listar() {

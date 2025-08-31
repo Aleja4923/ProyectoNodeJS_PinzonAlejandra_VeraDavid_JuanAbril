@@ -122,7 +122,7 @@ async function gestionarPropuestas() {
 async function gestionarProyectos() {
     let continuar = true;
     while(continuar) {
-        const opcion = mainView.mostrarMenuCRUD('proyectos');
+        const opcion = mainView.mostrarMenuCRUD('Proyecto');
         
         switch(opcion) {
             case 1:
