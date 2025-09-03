@@ -7,6 +7,7 @@ const PropuestaController = require('./controllers/propuestaController');
 const ProyectoController = require('./controllers/proyectoController');
 const ContratoController = require('./controllers/contratoController');
 const EntregableController = require('./controllers/entregableController');
+const ExportsController = require('./controllers/exportsController');
 
 // Instanciar componentes
 const mainView = new MainView();
@@ -17,6 +18,7 @@ const propuestaController = new PropuestaController();
 const proyectoController = new ProyectoController();
 const contratoController = new ContratoController();
 const entregableController = new EntregableController();
+const exportsController = new ExportsController();
 
 async function main() {
     let continuar = true;
@@ -44,13 +46,15 @@ async function main() {
                 continuar=false
                 mainView.mostrarMensaje("Saliendo del sistema...");
                 break;
+            case 7:
+                await exportsController();
+                break;
             default:
                 mainView.mostrarMensaje("Opción inválida.");
         }
     }
 }
 
-main();
 
 async function gestionarClientes() {
     let continuar = true;

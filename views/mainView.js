@@ -9,6 +9,7 @@ class mainView {
         console.log("4. Gestión de Contratos");
         console.log("5. Gestión de Entregables");
         console.log("6. Salir");
+        console.log("7. Exportar JSON")
         return parseInt(prompt("Seleccione una opción: "));
     }
     

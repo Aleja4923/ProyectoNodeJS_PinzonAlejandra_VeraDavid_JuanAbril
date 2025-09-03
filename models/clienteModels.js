@@ -1,7 +1,8 @@
 const {ObjectId} = require('mongodb');
 const connectDB = require('../db');
 
-class clienteModel {
+class clienteModel 
+{
     
     async crear(cliente) {
         cliente.fechaRegistro = new Date();
@@ -11,7 +12,7 @@ class clienteModel {
         const result = await db.collection('Cliente').insertOne(cliente);
         let idObjeto = result.insertedId;
         return idObjeto;}
-    }
+    
     
     async listar() {
         const db = await connectDB.connect();
@@ -38,7 +39,7 @@ class clienteModel {
         const db = await connectDB.connect();
         const result = await db.collection('Cliente').deleteOne({_id: new ObjectId(id)});
         return result.deletedCount;
-    }
-}
+    } 
 
+}
 module.exports = clienteModel;
